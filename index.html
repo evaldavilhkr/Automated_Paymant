@@ -3,176 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEVIL CEO Payment Gateway</title>
+    <title>DEVIL CEO Payment</title>
     <style>
-        :root {
-            --bkash: #d12053;
-            --nagad: #f7941d;
-            --rocket: #8c3494;
-            --upay: #25408f;
-        }
         body {
+            background-color: #f0f7ff; /* হালকা নীল ব্যাকগ্রাউন্ড */
             font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: #f5f6f7;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
         }
-        .container {
-            background: #fff;
-            width: 360px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        .main-card {
+            background: white;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding-bottom: 20px;
             overflow: hidden;
-            transition: 0.3s;
         }
-        .step { display: none; padding: 25px; text-align: center; }
-        .step.active { display: block; }
+        .step { display: none; }
+        .active { display: block; }
 
-        /* Step 1: Amount Input */
-        .header-logo {
-            width: 80px; height: 80px; background: #eee;
-            border-radius: 50%; margin: 0 auto 15px;
+        /* Step 1: Amount Input UI */
+        .step-header { text-align: center; padding: 30px 20px; }
+        .logo-circle {
+            width: 80px; height: 80px; border-radius: 50%;
+            background: #fff; border: 1px solid #ddd;
             display: flex; align-items: center; justify-content: center;
-            font-weight: bold; font-size: 20px; color: #555;
+            margin: 0 auto 10px; font-weight: bold; font-size: 18px; color: #d12053;
         }
-        h2 { margin: 10px 0; font-size: 18px; color: #333; }
-        input[type="number"] {
-            width: 100%; padding: 12px; margin: 20px 0;
-            border: 2px solid #ddd; border-radius: 8px;
-            font-size: 18px; text-align: center; box-sizing: border-box;
+        .company-name { font-size: 18px; font-weight: bold; color: #5a677d; margin: 5px 0; }
+        
+        .input-group { padding: 0 30px; margin-top: 20px; }
+        .input-label { font-size: 14px; color: #666; margin-bottom: 8px; display: block; }
+        .amount-field {
+            width: 100%; padding: 15px; border: 1px solid #dfe6ed;
+            border-radius: 8px; font-size: 20px; text-align: center;
+            background: #fcfdfe; box-sizing: border-box;
         }
-        .next-btn {
-            background: #007bff; color: white; border: none;
-            width: 100%; padding: 12px; border-radius: 8px;
-            cursor: pointer; font-weight: bold;
+        .btn-pay {
+            background: #0056b3; color: white; border: none;
+            width: 100%; padding: 15px; border-radius: 8px;
+            margin-top: 20px; font-size: 16px; font-weight: bold; cursor: pointer;
         }
 
-        /* Step 2: Method Selection */
-        .method-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;
+        /* Step 2: Method Selector (Real Image Look) */
+        .blue-bar { background: #0056b3; color: white; padding: 10px; font-size: 14px; text-align: center; margin: 20px 0; }
+        .method-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; padding: 0 20px; }
+        .method-box {
+            border: 1px solid #eef2f7; border-radius: 10px; padding: 15px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer;
         }
-        .method-card {
-            border: 1px solid #eee; padding: 15px; border-radius: 10px;
-            cursor: pointer; transition: 0.2s;
-        }
-        .method-card:hover { border-color: #007bff; background: #f0f7ff; }
-        .method-card img { height: 35px; }
+        .method-box img { max-width: 80px; height: auto; }
 
-        /* Step 3: Send Money Page */
-        .instruction-box { color: white; border-radius: 10px; padding: 20px; text-align: left; }
-        .instruction-item { margin-bottom: 8px; font-size: 13px; }
-        .trx-input {
-            width: 100%; padding: 10px; margin: 15px 0;
-            border: none; border-radius: 5px; text-align: center;
+        /* Step 3: bKash/Nagad Detail Page (Realistic) */
+        .invoice-card {
+            border: 1px solid #eee; margin: 20px; border-radius: 8px;
+            display: flex; justify-content: space-between; padding: 15px; align-items: center;
         }
-        .copy-btn {
-            background: #fff; color: #333; border: none;
-            padding: 2px 8px; border-radius: 4px; font-size: 11px;
-            cursor: pointer; margin-left: 5px; font-weight: bold;
+        .amount-display { font-size: 22px; font-weight: bold; color: #333; }
+        .payment-instruction-box {
+            background: #d12053; color: white; margin: 0 15px;
+            border-radius: 10px; padding: 20px;
         }
-        .verify-btn {
-            width: 100%; padding: 12px; border: 1px solid white;
-            background: transparent; color: white; border-radius: 8px;
-            margin-top: 10px; cursor: pointer; font-weight: bold;
+        .trx-input-white {
+            width: 100%; padding: 12px; border: none; border-radius: 5px;
+            margin: 15px 0; text-align: center; font-size: 14px; box-sizing: border-box;
+        }
+        .bullet-point { font-size: 12px; margin-bottom: 10px; line-height: 1.6; }
+        .copy-btn-mini {
+            background: #fff3f3; color: #333; border: 1px solid #ddd;
+            padding: 2px 8px; border-radius: 4px; font-size: 11px; cursor: pointer;
+        }
+        .btn-verify {
+            background: #d12053; color: white; border: none;
+            width: 90%; padding: 15px; border-radius: 8px;
+            margin: 20px auto; display: block; font-weight: bold; font-size: 16px;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
+<div class="main-card">
+    
     <div id="step1" class="step active">
-        <div class="header-logo">DEV</div>
-        <h2>DEVIL CEO</h2>
-        <p style="color: #666; font-size: 14px;">টাকার পরিমাণ লিখুন</p>
-        <input type="number" id="amountInput" placeholder="0.00" min="10">
-        <button class="next-btn" onclick="goToStep2()">পরবর্তী ধাপ</button>
+        <div class="step-header">
+            <div class="logo-circle">DEV</div>
+            <div class="company-name">DEVIL CEO</div>
+        </div>
+        <div class="input-group">
+            <span class="input-label">টাকার পরিমাণ টাইপ করুন</span>
+            <input type="number" id="userAmount" class="amount-field" placeholder="0.00">
+            <button class="btn-pay" onclick="toStep2()">পরবর্তী ধাপে যান</button>
+        </div>
     </div>
 
     <div id="step2" class="step">
-        <button onclick="goToStep1()" style="float: left; border: none; background: none; cursor: pointer;">‹ Back</button>
-        <h2>পেমেন্ট পদ্ধতি বেছে নিন</h2>
-        <div class="method-grid">
-            <div class="method-card" onclick="goToStep3('bkash')">
-                <img src="https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg" alt="bKash">
-            </div>
-            <div class="method-card" onclick="goToStep3('nagad')">
-                <img src="https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg" alt="Nagad">
-            </div>
-            <div class="method-card" onclick="goToStep3('rocket')">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Rocket_logo.svg/1280px-Rocket_logo.svg.png" alt="Rocket">
-            </div>
-            <div class="method-card" onclick="goToStep3('upay')">
-                <img src="https://itshisab.com/wp-content/uploads/2021/08/upay-logo.png" alt="Upay" style="height: 25px;">
-            </div>
+        <div class="step-header" style="padding: 20px;">
+            <div class="logo-circle" style="width: 60px; height: 60px;">DEV</div>
+            <div class="company-name">DEVIL CEO</div>
+        </div>
+        <div class="blue-bar">মোবাইল ব্যাংকিং</div>
+        <div class="method-container">
+            <div class="method-box" onclick="toStep3('bkash')"><img src="https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg"></div>
+            <div class="method-box" onclick="toStep3('nagad')"><img src="https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg"></div>
+            <div class="method-box" onclick="toStep3('rocket')"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Rocket_logo.svg/1280px-Rocket_logo.svg.png"></div>
+            <div class="method-box" onclick="toStep3('upay')"><img src="https://itshisab.com/wp-content/uploads/2021/08/upay-logo.png" style="height:25px"></div>
         </div>
     </div>
 
     <div id="step3" class="step">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <button onclick="goToStep2()" style="border: none; background: none; cursor: pointer;">‹ Back</button>
-            <img id="finalLogo" src="" alt="Logo" style="height: 30px;">
-            <span></span>
+        <div style="text-align:center; padding: 15px;">
+            <img id="mLogo" src="" style="height: 40px;">
         </div>
-        
-        <div id="instructionBg" class="instruction-box">
-            <p style="text-align: center; font-weight: bold; margin-top: 0;">ট্রানজেকশন আইডি দিন</p>
-            <input type="text" class="trx-input" placeholder="TrxID এখানে দিন">
-            
-            <div class="instruction-item">• <span id="ussdCode">*247#</span> ডায়াল করুন অথবা অ্যাপে যান।</div>
-            <div class="instruction-item">• <b>"Send Money"</b> অপশন সিলেক্ট করুন।</div>
-            <div class="instruction-item">• নম্বর: <b>01717724407</b> <button class="copy-btn" onclick="copyNum()">Copy</button></div>
-            <div class="instruction-item">• পরিমাণ: <b id="finalAmount">0</b> BDT</div>
-            <div class="instruction-item">• পেমেন্ট শেষে <b>Transaction ID</b> ইনপুট দিন।</div>
-            
-            <button class="verify-btn">VERIFY পেমেন্ট</button>
+        <div class="invoice-card">
+            <div style="font-size: 13px; color: #666;">
+                <strong>DEVIL CEO</strong><br>ইনভয়েস আইডি: #DVL992
+            </div>
+            <div class="amount-display">৳ <span id="displayAmt">0</span></div>
         </div>
+
+        <div id="dynamicTheme" class="payment-instruction-box">
+            <p style="text-align: center; margin-top: 0; font-weight: bold;">ট্রানজেকশন আইডি দিন</p>
+            <input type="text" class="trx-input-white" placeholder="ট্রানজেকশন আইডি দিন">
+            
+            <div class="bullet-point">• <span id="mUssd">*247#</span> ডায়াল করে "Send Money" এ যান।</div>
+            <div class="bullet-point">• প্রাপক নম্বর হিসেবে এই নম্বরটি লিখুন: <strong>01717724407</strong> 
+                <button class="copy-btn-mini" onclick="copyNum()">Copy</button>
+            </div>
+            <div class="bullet-point">• টাকার পরিমাণ: <strong id="mAmount">0</strong></div>
+            <div class="bullet-point">• পেমেন্ট নিশ্চিত করার পর প্রাপ্ত <strong>Transaction ID</strong> দিন।</div>
+        </div>
+        <button id="vBtn" class="btn-verify">VERIFY</button>
     </div>
+
 </div>
 
 <script>
-    let selectedAmount = 0;
+    let amount = 0;
 
-    function goToStep1() {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-        document.getElementById('step1').classList.add('active');
-    }
-
-    function goToStep2() {
-        const val = document.getElementById('amountInput').value;
-        if(val < 10) { alert("কমপক্ষে ১০ টাকা লিখুন"); return; }
-        selectedAmount = val;
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    function toStep2() {
+        amount = document.getElementById('userAmount').value;
+        if(amount < 10) return alert("সঠিক পরিমাণ দিন");
+        document.getElementById('step1').classList.remove('active');
         document.getElementById('step2').classList.add('active');
     }
 
-    function goToStep3(method) {
-        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+    function toStep3(method) {
+        document.getElementById('step2').classList.remove('active');
         document.getElementById('step3').classList.add('active');
-        
-        document.getElementById('finalAmount').innerText = selectedAmount;
-        const bg = document.getElementById('instructionBg');
-        const logo = document.getElementById('finalLogo');
-        const ussd = document.getElementById('ussdCode');
+        document.getElementById('displayAmt').innerText = amount;
+        document.getElementById('mAmount').innerText = amount;
+
+        const theme = document.getElementById('dynamicTheme');
+        const vBtn = document.getElementById('vBtn');
+        const mLogo = document.getElementById('mLogo');
+        const mUssd = document.getElementById('mUssd');
 
         if(method === 'bkash') {
-            bg.style.backgroundColor = '#d12053';
-            logo.src = 'https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg';
-            ussd.innerText = '*247#';
+            theme.style.background = "#d12053";
+            vBtn.style.background = "#d12053";
+            mLogo.src = "https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg";
+            mUssd.innerText = "*247#";
         } else if(method === 'nagad') {
-            bg.style.backgroundColor = '#f7941d';
-            logo.src = 'https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg';
-            ussd.innerText = '*167#';
+            theme.style.background = "#f7941d";
+            vBtn.style.background = "#f7941d";
+            mLogo.src = "https://www.logo.wine/a/logo/Nagad/Nagad-Logo.wine.svg";
+            mUssd.innerText = "*167#";
         } else if(method === 'rocket') {
-            bg.style.backgroundColor = '#8c3494';
-            logo.src = 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Rocket_logo.svg/1280px-Rocket_logo.svg.png';
-            ussd.innerText = '*322#';
-        } else if(method === 'upay') {
-            bg.style.backgroundColor = '#25408f';
-            logo.src = 'https://itshisab.com/wp-content/uploads/2021/08/upay-logo.png';
-            ussd.innerText = '*268#';
+            theme.style.background = "#8c3494";
+            vBtn.style.background = "#8c3494";
+            mLogo.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Rocket_logo.svg/1280px-Rocket_logo.svg.png";
+            mUssd.innerText = "*322#";
         }
     }
 

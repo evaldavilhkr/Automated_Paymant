@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বিকাশ পেমেন্ট গেটওয়ে</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .payment-card {
+            background-color: white;
+            width: 380px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            text-align: center;
+        }
+        .header {
+            padding: 20px;
+        }
+        .header img {
+            width: 80px;
+        }
+        .info-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            border: 1px solid #eee;
+            margin: 0 20px;
+            border-radius: 8px;
+        }
+        .amount-box {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .main-content {
+            background-color: #d12053; /* বিকাশ থিম কালার */
+            color: white;
+            padding: 20px;
+            margin-top: 20px;
+        }
+        .main-content h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .trx-input {
+            width: 90%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .instruction-list {
+            text-align: left;
+            font-size: 12px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .copy-btn {
+            background: #fff;
+            color: #d12053;
+            border: none;
+            padding: 2px 8px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10px;
+            font-weight: bold;
+        }
+        .verify-btn {
+            background-color: #d12053;
+            color: white;
+            border: 1px solid white;
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .verify-btn:hover {
+            background-color: #b01a44;
+        }
+        .footer-btn {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-card">
+    <div class="header">
+        <img src="https://www.logo.wine/a/logo/BKash/BKash-Logo.wine.svg" alt="bKash">
+    </div>
+
+    <div class="info-box">
+        <div style="text-align: left;">
+            <small style="color: #888;">BD TOP SELL</small><br>
+            <small style="font-size: 10px; color: #aaa;">Invoice: Fi3PsRD...</small>
+        </div>
+        <div class="amount-box">৳ 500</div>
+    </div>
+
+    <div class="main-content">
+        <h3>ট্রানজেকশন আইডি দিন</h3>
+        <input type="text" class="trx-input" placeholder="ট্রানজেকশন আইডি এখানে লিখুন">
+        
+        <div class="instruction-list">
+            • *247# ডায়াল করে আপনার bKash মেনুতে যান অথবা অ্যাপে যান।<br>
+            • <b>"Send Money"</b> অপশনে ক্লিক করুন।<br>
+            • প্রাপক নম্বর: <b>01339755796</b> <button class="copy-btn">Copy</button><br>
+            • টাকার পরিমাণ: <b>500</b><br>
+            • পেমেন্ট শেষে প্রাপ্ত <b>Transaction ID</b> উপরে দিন।
+        </div>
+    </div>
+
+    <div class="footer-btn">
+        <button class="verify-btn">VERIFY</button>
+    </div>
+</div>
+
+</body>
+</html>
